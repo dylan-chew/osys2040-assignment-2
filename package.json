@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node ./src/server.js",
-    "watch": "nodemon --watch src npm start"
+    "watch": "nodemon --watch src npm start",
+    "watch-heroku": "nodemon --watch src heroku local"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "cookie": "^0.3.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
