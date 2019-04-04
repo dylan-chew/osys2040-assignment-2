@@ -34,7 +34,11 @@ async function createMessage(handle, data) {
 async function getMessages() {
   try {
     const result = await PostgresUtil.pool.query(
-      'SELECT * FROM messages')
+      `SELECT * FROM messages
+        LEFT JOIN (
+            SELECT message_id, COUNT(*) AS like_count FROM likes GROUP BY message_id) like_count
+                ON messages.id = like_count.message_id`
+                )
 
     return result.rows
   } catch (exception) {
@@ -49,6 +53,8 @@ async function getMessages() {
     }
   }
 }
+
+
 
 module.exports = {
   createMessage: createMessage,
